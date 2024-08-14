@@ -1,4 +1,4 @@
-package com.alejandrosanabriav.cryptoapp.presentation.coinList.components
+package com.alejandrosanabriav.cryptoapp.presentation.coinDetail.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,21 +16,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.alejandrosanabriav.cryptoapp.presentation.Screen
-import com.alejandrosanabriav.cryptoapp.presentation.coinList.CoinListViewModel
+import com.alejandrosanabriav.cryptoapp.presentation.coinDetail.CoinDetailViewModel
 
 @Composable
-fun CoinListScreen(
+fun CoinDetailScreen(
     navController: NavController,
-    viewModel: CoinListViewModel = hiltViewModel()
+    viewModel: CoinDetailViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
 
     Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(state.coins) { coin ->
-                CoinListItem(coin = coin) {
-                    navController.navigate(Screen.CoinDetailScreen.route + "/${it.id}")
+        state.coinDetail?.let {
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+
+                items(it.tags) { tag ->
+                    CoinTag(tag = tag.name)
                 }
             }
         }
