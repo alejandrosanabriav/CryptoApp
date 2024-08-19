@@ -1,5 +1,6 @@
 package com.alejandrosanabriav.cryptoapp.presentation.coinDetail
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -23,7 +24,9 @@ class CoinDetailViewModel @Inject constructor(
     val state: State<CoinDetailState> = _state
 
     init {
+        Log.d("CoinDetail", "init")
         savedStateHandle.get<String>(Constants.PARAM_COIN_ID)?.let { coinId ->
+            Log.d("CoinDetail", "Coin ${coinId}")
             getCoin(coinId = coinId)
         }
     }
